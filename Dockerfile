@@ -26,8 +26,8 @@ RUN if [ "${APT_SOURCES_LIST_FILE}" != "" ]; then \
     fi
 
 RUN apt-get update \
-    && apt-get -y upgrade \
-    && DEBIAN_FRONTEND="noninteractive" TZ="Asia/Shanghai" apt-get install -y build-essential curl git linux-headers-$(uname –r) maven autoconf libtool cmake \
+    && apt-get -y upgrade --option=Dpkg::Options::=--force-confdef \
+    && DEBIAN_FRONTEND="noninteractive" TZ="Asia/Shanghai" apt-get install --option=Dpkg::Options::=--force-confdef -y build-essential curl git linux-headers-$(uname –r) maven autoconf libtool cmake \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/*
 
